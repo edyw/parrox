@@ -17,7 +17,7 @@ const discordSendMessage = (guildId: string, channelId: string, text: any) => {
 
 const telegramSendMessage = (groupId: number, text: string) => {
   try {
-    config.telegram.telegram.sendMessage(groupId, text)
+    config.telegram.telegram.sendMessage(groupId, text, { parse_mode: 'MarkdownV2'})
   } catch (e) {
     logger.error('Failed sending message to telegram. ', e)
     return null

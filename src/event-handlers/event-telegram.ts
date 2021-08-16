@@ -1,7 +1,7 @@
 import messaging from '../helpers/messaging'
 import logger from '../helpers/logger'
 import config from '../config'
-import telegramSync from '../telegram-command/telegram-sync'
+import telegramSync from '../telegram-commands/telegram-sync'
 import { isGroupAdminOrOwner } from '../helpers/telegram-object'
 
 const guildId = '872815108521353236'
