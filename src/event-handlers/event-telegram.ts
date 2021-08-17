@@ -4,9 +4,6 @@ import config from '../config'
 import telegramSync from '../telegram-commands/telegram-sync'
 import { isGroupAdminOrOwner } from '../helpers/telegram-object'
 
-const guildId = '872815108521353236'
-const channelId = '872847144686583849'
-
 const onText = async (ctx: any) => {
   try {
     if (ctx.message.text) {
@@ -105,9 +102,27 @@ const onAnimation = async (ctx: any) => {
   }
 }
 
+const onPinnedMessage = async (ctx: any) => {
+  try {
+    console.log(ctx.message.pinned_message)
+    if (!!ctx.message.pinned_message.text) {
+      const syncRec = config.syncMap.groupId.get(ctx.message.pinned_message.chat.id)
+      if (syncRec === undefined) return
+
+      const message = `**${ctx.message.pinned_message.from.first_name} pinned [Telegram]**: ${ctx.message.pinned_message.text}`
+      messaging.discordSendMessage(syncRec.discord.guildId, syncRec.discord.channelId, message)
+      logger.verbose(`[Text] Telegram(${syncRec.telegram.groupName}) -> Discord(${syncRec.discord.guildName}/${syncRec.discord.channelName}): ${message}`)
+    }
+  } catch (e) {
+    logger.error('Failed processing telegram event on pinned message. ', e)
+    return null
+  }
+}
+
 export default {
   onText,
   onSticker,
   onPhoto,
-  onAnimation
+  onAnimation,
+  onPinnedMessage
 }

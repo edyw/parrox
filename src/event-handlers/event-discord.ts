@@ -48,6 +48,7 @@ const onMessageCreate = async (discordMsg: Discord.Message) => {
     }
 
     if (!discordMsg.author.bot) {
+      if (!discordMsg.content) return
       const syncRec = config.syncMap.channelId.get(discordMsg.channelId)
       if (syncRec === undefined) return
 
@@ -63,7 +64,32 @@ const onMessageCreate = async (discordMsg: Discord.Message) => {
   }
 }
 
+const onMessageUpdate = async (
+  discordOldMsg: Discord.Message | Discord.PartialMessage,
+  discordNewMsg: Discord.Message | Discord.PartialMessage
+) => {
+  try {
+    if (discordNewMsg === null) return
+    if (!discordNewMsg.author!.bot) {
+      const syncRec = config.syncMap.channelId.get(discordNewMsg.channelId)
+      if (syncRec === undefined) return
+
+      const messageContent = _getFormattedMessageForTelegram(discordNewMsg)
+      let username = (discordNewMsg.pinned) ? discordNewMsg.member!.displayName + ' pinned [Discord]' : discordNewMsg.member!.displayName + ' edited'
+      username = _addEscapeToSpecialCharacter(username)
+      
+      const msg = `*${username}*: ${messageContent}`
+      messaging.telegramSendMessage(syncRec.telegram.groupId, msg) 
+      logger.verbose(`[Message] Discord(${syncRec.discord.guildName}/${syncRec.discord.channelName}) -> Telegram(${syncRec.telegram.groupName}): ${msg}`)
+    }
+  } catch (e) {
+    logger.error('Failed processing discord event on messageUpdate. ', e)
+    return null
+  }
+}
+
 export default {
   onInteractionCreate,
-  onMessageCreate
+  onMessageCreate,
+  onMessageUpdate
 }
