@@ -14,19 +14,15 @@ const _addEscapeToSpecialCharacter = (messageContent: string) => {
 const _getFormattedMessageForTelegram = (discordMsg: any): string => {
 	const _isAttachment = (messageAttachment: any) => {
 		return messageAttachment.first()
-	}
-
+  }
+  
 	let messageContent = ''
-  console.log(discordMsg.attachments)
-  console.log(discordMsg.cleanContent)
-
   if (discordMsg.cleanContent !== undefined)
     messageContent = discordMsg.cleanContent + '\n'
 
   if (_isAttachment(discordMsg.attachments)) {
 		messageContent += discordMsg.attachments.first().url
   }
- 
   return _addEscapeToSpecialCharacter(messageContent)
 }
 
