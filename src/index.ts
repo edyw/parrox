@@ -1,5 +1,3 @@
-import 'dotenv/config'
-
 import initialize from './initializer'
 import logger from './helpers/logger'
 import eventDiscord from './event-handlers/event-discord'
