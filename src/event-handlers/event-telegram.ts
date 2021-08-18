@@ -106,10 +106,10 @@ const onPinnedMessage = async (ctx: any) => {
   try {
     console.log(ctx.message.pinned_message)
     if (!!ctx.message.pinned_message.text) {
-      const syncRec = config.syncMap.groupId.get(ctx.message.pinned_message.chat.id)
+      const syncRec = config.syncMap.groupId.get(ctx.message.chat.id) 
       if (syncRec === undefined) return
 
-      const message = `**${ctx.message.pinned_message.from.first_name} pinned [Telegram]**: ${ctx.message.pinned_message.text}`
+      const message = `**${ctx.message.from.first_name} pinned [Telegram]**: ${ctx.message.pinned_message.text}`
       messaging.discordSendMessage(syncRec.discord.guildId, syncRec.discord.channelId, message)
       logger.verbose(`[Text] Telegram(${syncRec.telegram.groupName}) -> Discord(${syncRec.discord.guildName}/${syncRec.discord.channelName}): ${message}`)
     }
