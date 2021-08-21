@@ -40,18 +40,18 @@ const onMessageCreate = async (discordMsg: Discord.Message) => {
     if (discordMsg.content.toLowerCase().startsWith(process.env.DISCORD_COMMAND_PREFIX!)) {
       const command = discordMsg.content.split(/\s+/)[1]
       const args = discordMsg.content.split(/\s+/).slice(2)
-      if (!config.discord.commands.has(command)) return
-
-      logger.verbose(`Discord command: [${command}], args: [${args}], owner: ${isGuildOwner(discordMsg)}`)
-      config.discord.commands.get(command).execute(discordMsg, args)
-      return
+      if (config.discord.commands.has(command)) {
+        logger.verbose(`Discord command: [${command}], args: [${args}], owner: ${isGuildOwner(discordMsg)}`)
+        config.discord.commands.get(command).execute(discordMsg, args)
+        return
+      }
     }
 
     if (!discordMsg.author.bot) {
-      if (!discordMsg.content) return
+      if (!discordMsg.content && !discordMsg.attachments) return
+
       const syncRec = config.syncMap.channelId.get(discordMsg.channelId)
       if (syncRec === undefined) return
-
       const messageContent = _getFormattedMessageForTelegram(discordMsg)
       const username = _addEscapeToSpecialCharacter(discordMsg.member!.displayName)
       const msg = `*${username}*: ${messageContent}`
