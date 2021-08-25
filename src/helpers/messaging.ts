@@ -7,7 +7,10 @@ const discordSendMessage = (guildId: string, channelId: string, text: any) => {
     if (guild !== undefined) {
       const channel = guild.channels.cache.find(channel => channel.id === channelId)
       const textChannel: any = guild.channels.resolve(channel!)
-      textChannel.send(text)
+      textChannel.send(text).catch((e: Error) => {
+        console.log('[messaging.discordSendMessage] Error: ', e)
+        return null
+      })
     }
   } catch (e) {
     logger.error('Failed sending message to discord. ', e)
@@ -17,7 +20,10 @@ const discordSendMessage = (guildId: string, channelId: string, text: any) => {
 
 const telegramSendMessage = (groupId: number, text: string) => {
   try {
-    config.telegram.telegram.sendMessage(groupId, text, { parse_mode: 'MarkdownV2'})
+    config.telegram.telegram.sendMessage(groupId, text, { parse_mode: 'MarkdownV2' }).catch(e => {
+      console.log('[messaging.telegramSendMessage] Error: ', e)
+      return null
+    })
   } catch (e) {
     logger.error('Failed sending message to telegram. ', e)
     return null
