@@ -157,7 +157,10 @@ module.exports = {
       } else {
         response = 'You have to be Server Owner to use sync command.'
       }
-      message.channel.send('```' + response + '```')
+      message.channel.send('```' + response + '```').catch((e: Error) => {
+        console.log('[discord-sync.execute] Error: ', e)
+        return null
+      })
     }
     catch(e){
       console.error('Discord command [sync] Error: ', e)
