@@ -3,7 +3,7 @@ import Discord from 'discord.js'
 
 import messaging from '../helpers/messaging'
 import logger from '../helpers/logger'
-import { isGuildOwner } from '../helpers/discord-object'
+import { isGuildAdmin } from '../helpers/discord-object'
 import config from '../config'
 
 const _addEscapeToSpecialCharacter = (messageContent: string) => {
@@ -41,7 +41,7 @@ const onMessageCreate = async (discordMsg: Discord.Message) => {
       const command = discordMsg.content.split(/\s+/)[1]
       const args = discordMsg.content.split(/\s+/).slice(2)
       if (config.discord.commands.has(command)) {
-        logger.verbose(`Discord command: [${command}], args: [${args}], owner: ${isGuildOwner(discordMsg)}`)
+        logger.verbose(`Discord command: [${command}], args: [${args}], admin: ${isGuildAdmin(discordMsg)}`)
         config.discord.commands.get(command).execute(discordMsg, args)
         return
       }

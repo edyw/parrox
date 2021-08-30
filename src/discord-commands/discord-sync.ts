@@ -1,5 +1,5 @@
 import Discord from 'discord.js'
-import { isGuildOwner, getGuildChannel } from '../helpers/discord-object'
+import { isGuildAdmin, getGuildChannel } from '../helpers/discord-object'
 import { generateLinkId } from '../helpers/id'
 import collectionSync from '../database/collection-sync'
 import config from '../config'
@@ -126,7 +126,7 @@ module.exports = {
     try {
       let response = ''
 
-      if (isGuildOwner(message)) {
+      if (isGuildAdmin(message)) {
         const guildChannel = getGuildChannel(message, config.discord)
         const channel: Channel = {
           guildId: message.guildId!,
@@ -155,7 +155,7 @@ module.exports = {
           }
         }
       } else {
-        response = 'You have to be Server Owner to use sync command.'
+        response = 'You have to be Server Admin to use sync command.'
       }
       message.channel.send('```' + response + '```').catch((e: Error) => {
         console.log('[discord-sync.execute] Error: ', e)

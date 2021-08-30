@@ -1,7 +1,7 @@
 import Discord from 'discord.js'
 
-const isGuildOwner = (message: Discord.Message) => {
-  return (message.guild?.ownerId === message.author.id)
+const isGuildAdmin = (message: Discord.Message) => {
+  return (message.member?.permissions.has('ADMINISTRATOR'))
 }
 
 const getGuildChannel = (message: Discord.Message, discord: Discord.Client): Discord.GuildChannel|Discord.ThreadChannel|null => {
@@ -17,6 +17,6 @@ const getGuildChannel = (message: Discord.Message, discord: Discord.Client): Dis
 }
 
 export {
-  isGuildOwner,
+  isGuildAdmin,
   getGuildChannel
 }
