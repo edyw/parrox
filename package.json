@@ -1,48 +1,48 @@
 {
-  "name": "parrox",
-  "version": "0.0.1",
-  "description": "Parrox Chat Sync",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "ts-node-dev -r dotenv/config --exit-child --transpile-only  -- src/index.ts",
-    "dev": "ts-node-dev -r dotenv/config --respawn --transpile-only --inspect -- src/index.ts dotenv_config_path=.env.dev"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/edyw/parrox.git"
-  },
-  "keywords": [
-    "discord",
-    "telegram",
-    "chat",
-    "sync"
-  ],
-  "author": "edyw@hotmail.com",
-  "bugs": {
-    "url": "https://github.com/edyw/parrox/issues"
-  },
-  "homepage": "https://github.com/edyw/parrox#readme",
-  "dependencies": {
-    "@types/jest": "^26.0.24",
-    "date-fns": "^2.23.0",
-    "discord.js": "^13.8.1",
-    "dotenv": "^10.0.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-prettier": "^3.4.0",
-    "jest": "^27.0.6",
-    "mongodb": "^4.1.0",
-    "nanoid": "^3.1.23",
-    "telegraf": "^4.8.5",
-    "ts-jest": "^27.0.4",
-    "ts-node-dev": "^1.1.8",
-    "typescript": "^4.3.5",
-    "winston": "^3.3.3"
-  },
-  "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^4.29.0",
-    "@typescript-eslint/parser": "^4.29.0",
-    "eslint": "^7.32.0",
-    "prettier": "2.3.2"
-  }
-}
+    "name": "parrox",
+    "version": "0.1.1",
+    "description": "Parrox Chat Sync",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "ts-node-dev -r dotenv/config --exit-child --transpile-only  -- src/index.ts",
+        "dev": "ts-node-dev -r dotenv/config --respawn --transpile-only --inspect -- src/index.ts dotenv_config_path=.env.dev"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/edyw/parrox.git"
+    },
+    "keywords": [
+        "discord",
+        "telegram",
+        "chat",
+        "sync"
+    ],
+    "author": "edyw@hotmail.com",
+    "bugs": {
+        "url": "https://github.com/edyw/parrox/issues"
+    },
+    "homepage": "https://github.com/edyw/parrox#readme",
+    "dependencies": {
+        "@types/jest": "^26.0.24",
+        "date-fns": "^2.23.0",
+        "discord.js": "^13.8.1",
+        "dotenv": "^16.0.1",
+        "eslint-config-prettier": "^8.3.0",
+        "eslint-plugin-prettier": "^3.4.0",
+        "jest": "^27.0.6",
+        "mongodb": "^4.1.0",
+        "nanoid": "^3.1.23",
+        "telegraf": "^4.8.5",
+        "ts-jest": "^27.0.4",
+        "ts-node-dev": "^1.1.8",
+        "typescript": "^4.3.5",
+        "winston": "^3.3.3"
+    },
+    "devDependencies": {
+        "@typescript-eslint/eslint-plugin": "^4.29.0",
+        "@typescript-eslint/parser": "^4.29.0",
+        "eslint": "^7.32.0",
+        "prettier": "2.3.2"
+    }
+} 
